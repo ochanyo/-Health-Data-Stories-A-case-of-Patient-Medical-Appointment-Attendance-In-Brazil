@@ -6,7 +6,7 @@ st.write("# Medical Appointment Attendance In Brazil")
 #we have about 8 variables to collect from the user
 #split the app into 2 columns to improve the UI
 col1,col2=st.columns(2)
-gender = col1.selectbox("Select your gender",["Male", "Female"])
+gender = col1.selectbox("Select your gender",["M", "F"])
 age=col2.number_input("What is your Age?")
 scholarship=col1.selectbox("Did you receive the Scholarship?",["Yes","No"])
 hipertension=col2.selectbox("Do you suffer from hypertension?",["Yes","No"])
@@ -22,7 +22,7 @@ sms_received=col2.selectbox("Did you recieve an SMS reminding you of your appoin
 
 df_pred = pd.DataFrame([[gender,age,scholarship,hipertension,diabetes,alcoholism,handcap,sms_received]],columns= ['gender','age','scholarship','hipertension','diabetes','alcoholism','handcap','sms_received'])
 
-df_pred['gender'] = df_pred['gender'].apply(lambda x: 1 if x == "Male" else 0)
+df_pred['gender'] = df_pred['gender'].apply(lambda x: 1 if x == "M" else 0)
 df_pred['scholarship'] = df_pred['scholarship'].apply(lambda x: 1 if x == "Yes" else 0)
 df_pred['hipertension'] = df_pred['hipertension'].apply(lambda x: 1 if x == "Yes" else 0)
 df_pred['diabetes'] = df_pred['diabetes'].apply(lambda x: 1 if x == "Yes" else 0)
@@ -39,6 +39,6 @@ prediction=model.predict(df_pred)
 if st.button('Predict'):
     if(prediction[0]==0):
         st.write('<p class="big-font">You are likely to attend your medical appointment.</p>',unsafe_allow_html=True)
-else:
+    else:
         st.write('<p class="big-font">You are likely to miss your medical appointment  </p>',unsafe_allow_html=True)
 
